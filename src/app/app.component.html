@@ -33,7 +33,7 @@
         <input type="number" placeholder="Phone Number" name="phone" ngModel/>
       </div>
       <div class="input-box">
-        <input type="date" placeholder="Date of Birth" name="dob" ngModel required #userdob="ngModel"/>
+        <input type="date" placeholder="Date of Birth" name="dob" [(ngModel)]="dob" required #userdob="ngModel"/>
       </div>
     </div>
 
@@ -42,7 +42,7 @@
       <div>
         <small *ngIf="username.invalid && username.touched">*User Name is required field</small>
       </div>
-      <button class="btn-gen-username" [disabled]=" fname.invalid || lname.invalid || userdob.invalid" (click)="generateUserName()">
+      <button class="btn-gen-username" type="button" [disabled]=" fname.invalid || lname.invalid || userdob.invalid" (click)="generateUserName()">
         Create a Username
       </button>
     </div>
@@ -50,8 +50,8 @@
     <div class="gender-box">
       <h3>Gender</h3>
       <div class="gender-option">
-        <div class="gender" *ngFor="let gen of genders">
-          <input type="radio" [id]="gen.id" [name]="gen.value" checked ngModel/>
+        <div class="gender" *ngFor="let gen of genders" >
+          <input type="radio" [id]="gen.id" [value]="gen.value" checked ngModel name="gender"/>
           <label for="1"> {{gen.display}} </label>
         </div>
       </div>
