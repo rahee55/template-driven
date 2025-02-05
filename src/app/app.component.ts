@@ -12,8 +12,15 @@ export class AppComponent {
   title = 'template-driven-form';
   firstname: string = '';
   lastname: string = '';
+  userName: string = '';
   dob: string = '';
   emailAddress: string = '';
+  gender: string = '';
+  country: string = '';
+  city: string = '';
+  region: string = '';
+  postal: string = '';
+  isAgreed: boolean = false;
 
   genders = [
     {id: 1 , value: 'Male' , display: "Male"},
@@ -24,28 +31,29 @@ export class AppComponent {
   generateUserName(){
     let username: string = '';
 
-    if(this.firstname.length >= 3){
-      username += this.firstname.slice(0 , 3)
+    if(this.form.value.firstname.length >= 3){
+      username += this.form.value.firstname.slice(0 , 3)
     }else{
-      username += this.firstname
+      username += this.form.value.firstname
     }
 
-    if(this.lastname.length >= 3){
-      username += this.lastname.slice(0 , 3)
+    if(this.form.value.lastname.length >= 3){
+      username += this.form.value.lastname.slice(0 , 3)
     }else{
-      username += this.lastname
+      username += this.form.value.lastname
     }
 
-    let datetime = new Date(this.dob);
-    username += datetime.getFullYear();
+    username += '@';
+
+    let datetime = new Date(this.form.value.dob);
+    username += datetime.getDate();
     username = username.toLocaleLowerCase();
-
-    console.log(username);
-    
+    this.userName = username
     this.form.setValue({
       firstname: this.form.value.firstname,
       lastname: this.form.value.lastname,
       email: this.form.value.email,
+      agreement: this.form.value.agreement,
       phone: this.form.value.phone,
       dob: this.form.value.dob,
       username: username,
@@ -65,11 +73,18 @@ export class AppComponent {
   @ViewChild('registrationForm') form: NgForm;
   onFormSubmitted(){
     console.log(this.form);
-    console.log(this.form.controls['firstname'].value);
-    console.log(this.form.value.lastname);
-    console.log(this.form.value.email);
-    console.log(this.form.value.address.country);
-    this.form.reset();
+    this.firstname = this.form.value.firstname;
+    this.lastname = this.form.value.lastname;
+    this.emailAddress = this.form.value.email;
+    this.gender = this.form.value.gender;
+    this.dob = this.form.value.dob;
+    this.country = this.form.value.address.country;
+    this.city = this.form.value.address.city;
+    this.region = this.form.value.address.region;
+    this.postal = this.form.value.address.postal;
+    this.isAgreed = this.form.value.agreement;
+
+    // this.form.reset();
   }
   ngOnInit(){
     console.log(this.form);

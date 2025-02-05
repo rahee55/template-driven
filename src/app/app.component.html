@@ -4,15 +4,14 @@
   <form class="form" (ngSubmit)="onFormSubmitted()" #registrationForm="ngForm">
     <div class="column">
       <div class="input-box">
-        <input type="text" placeholder="First Name" name="firstname" [(ngModel)]="firstname" required #fname="ngModel"/>
+        <input type="text" placeholder="First Name" name="firstname" ngModel required #fname="ngModel"/>
         <div>
           <small *ngIf="fname.invalid && fname.touched">*First Name is required field</small>
           <span *ngIf="firstname">You Entered: {{firstname}}</span>
         </div>
       </div> 
-
       <div class="input-box">
-        <input type="text" placeholder="Last Name" name="lastname" [(ngModel)]="lastname" required #lname="ngModel"/>
+        <input type="text" placeholder="Last Name" name="lastname" ngModel required #lname="ngModel"/>
         <div>
           <small *ngIf="lname.invalid && lname.touched">*Last Name is required field</small>
           <span *ngIf="lastname">You Entered: {{lastname}}</span> 
@@ -21,7 +20,7 @@
     </div>    
 
     <div class="input-box">
-      <input type="text" placeholder="Email" name="email" [(ngModel)]="emailAddress" required email #email="ngModel"/>
+      <input type="text" placeholder="Email" name="email" ngModel required email #email="ngModel"/>
       <div>
         <small *ngIf="email.invalid && email.touched">*Entered Email is not valid</small>
         <span *ngIf="emailAddress">You Entered: {{emailAddress}}</span> 
@@ -33,7 +32,7 @@
         <input type="number" placeholder="Phone Number" name="phone" ngModel/>
       </div>
       <div class="input-box">
-        <input type="date" placeholder="Date of Birth" name="dob" [(ngModel)]="dob" required #userdob="ngModel"/>
+        <input type="date" placeholder="Date of Birth" name="dob" ngModel required #userdob="ngModel"/>
       </div>
     </div>
 
@@ -78,7 +77,34 @@
         <input type="number" placeholder="Postal code" name="postal" ngModel required/>
       </div>
     </div>
+    <div class="column">
+      <input type="checkbox" name="agreement" [(ngModel)]="isAgreed">
+      <label for="agreement"> I agree to terms & conditions</label><br>
+    </div>
     <small *ngIf="addr.invalid && addr.touched">*Some of the address fields does not contain valid value</small>
     <input type="submit" value="Submit" class="submit-btn" [disabled]="registrationForm.invalid"> 
   </form>
+</section>
+<section class="user-detail-container">
+  <div class="user-details-container">
+    <div class="user-avatar">
+      <p>{{firstname.slice(0, 1).toUpperCase()}} {{lastname.slice(0, 1).toUpperCase()}}</p>
+    </div>
+    <div class="user-details">
+      <div class="user-name">
+        <h2>{{ firstname }} {{ lastname }}</h2>
+      </div>
+      <p><b>Email:</b> {{ emailAddress}}</p>
+      <p><b>Username:</b> {{ userName }} </p>
+      <p><b>Date of birth:</b> {{ dob }}</p>
+      <p><b>Gender:</b> {{gender}} </p>
+      <div class="user-name">
+        <h3>Address</h3>
+      </div>
+      <span>{{country }}</span>.
+      <span>{{ city }}</span>.
+      <span>{{ region }}</span>.
+      <span> {{ postal }}</span>
+    </div>
+  </div>
 </section>
